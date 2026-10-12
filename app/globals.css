@@ -1,0 +1,392 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is([data-theme='dark'] *));
+
+/*
+  Sarkhat design tokens — values verbatim from Brand Book v2 / sarkhat-tokens.css (v2.0, Mehr 1405).
+  Light on :root, independently tuned dark on [data-theme="dark"]. Components read only these tokens.
+*/
+:root {
+  color-scheme: light;
+  --sk-brand: #3ec873;
+  --sk-brand-hover: #33b064;
+  --sk-brand-active: #23914f;
+  --sk-brand-subtle: #eaf8ef;
+  --sk-brand-muted: #cdefd9;
+  --sk-brand-on: #0f1712;
+  --sk-brand-text: #1a7a41;
+  --sk-brand-indicator: #23914f;
+  --sk-brand-ink: #131a16;
+
+  --sk-text: #131a16;
+  --sk-text-2: #3d4540;
+  --sk-text-3: #5f6862;
+  --sk-text-disabled: #9ea59f;
+  --sk-text-inverse: #f5f5f0;
+
+  --sk-paper: #f5f5f0;
+  --sk-paper-2: #ecede6;
+  --sk-surface: #ffffff;
+  --sk-sunken: #f0f1eb;
+  --sk-scrim: rgba(19, 26, 22, 0.48);
+
+  --sk-line: #dfe1d8;
+  --sk-line-strong: #7d847e;
+  --sk-line-tag: #c5cac2;
+  --sk-focus: #1a7a41;
+  --sk-hover: rgba(19, 26, 22, 0.05);
+  --sk-pressed: rgba(19, 26, 22, 0.09);
+
+  --sk-success: #1a7442;
+  --sk-success-subtle: #e6f5ec;
+  --sk-warning: #8a6100;
+  --sk-warning-subtle: #fbf1d9;
+  --sk-error: #b42318;
+  --sk-error-subtle: #fce8e6;
+  --sk-info: #0e6e8c;
+  --sk-info-subtle: #e3f2f7;
+
+  --sk-verified: #1e4fa0;
+  --sk-verified-subtle: #e8eef9;
+  --sk-unverified: #a3480b;
+  --sk-unverified-subtle: #fcede2;
+  --sk-ai: #5b4fc4;
+  --sk-ai-subtle: #efeefb;
+
+  --sk-up: #087556;
+  --sk-down: #c0362c;
+  --sk-flat: #5f6963;
+
+  --sk-data-1: #131a16;
+  --sk-data-2: #2a62cc;
+  --sk-data-grid: #dfe1d8;
+  --sk-data-event: #3ec873;
+
+  --sk-shadow-overlay: 0 8px 24px rgba(19, 26, 22, 0.12);
+
+  /* shadcn bridge */
+  --background: var(--sk-paper);
+  --foreground: var(--sk-text);
+  --card: var(--sk-surface);
+  --card-foreground: var(--sk-text);
+  --popover: var(--sk-surface);
+  --popover-foreground: var(--sk-text);
+  --primary: var(--sk-brand);
+  --primary-foreground: var(--sk-brand-on);
+  --secondary: var(--sk-paper-2);
+  --secondary-foreground: var(--sk-text);
+  --muted: var(--sk-sunken);
+  --muted-foreground: var(--sk-text-3);
+  --accent: var(--sk-paper-2);
+  --accent-foreground: var(--sk-text);
+  --destructive: var(--sk-error);
+  --border: var(--sk-line);
+  --input: var(--sk-line-strong);
+  --ring: var(--sk-focus);
+  --radius: 0.125rem;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --sk-brand: #3ec873;
+  --sk-brand-hover: #5ad48a;
+  --sk-brand-active: #33b064;
+  --sk-brand-subtle: #13291c;
+  --sk-brand-muted: #0f4527;
+  --sk-brand-on: #0f1712;
+  --sk-brand-text: #5ad48a;
+  --sk-brand-indicator: #3ec873;
+  --sk-brand-ink: #f5f5f0;
+
+  --sk-text: #e8ece9;
+  --sk-text-2: #b6bfb9;
+  --sk-text-3: #8f9a93;
+  --sk-text-disabled: #59635d;
+  --sk-text-inverse: #131a16;
+
+  --sk-paper: #0e1311;
+  --sk-paper-2: #121916;
+  --sk-surface: #161e1a;
+  --sk-sunken: #0b0f0d;
+  --sk-scrim: rgba(0, 0, 0, 0.64);
+
+  --sk-line: #2a3530;
+  --sk-line-strong: #6b7871;
+  --sk-line-tag: #3a4741;
+  --sk-focus: #3ec873;
+  --sk-hover: rgba(232, 236, 233, 0.06);
+  --sk-pressed: rgba(232, 236, 233, 0.1);
+
+  --sk-success: #5ad68b;
+  --sk-success-subtle: #12291b;
+  --sk-warning: #e9be4f;
+  --sk-warning-subtle: #2b230f;
+  --sk-error: #ff8a80;
+  --sk-error-subtle: #2e1513;
+  --sk-info: #5cc4e0;
+  --sk-info-subtle: #0f2730;
+
+  --sk-verified: #8fb4f2;
+  --sk-verified-subtle: #141f33;
+  --sk-unverified: #f5a066;
+  --sk-unverified-subtle: #2e1a0e;
+  --sk-ai: #aba4f5;
+  --sk-ai-subtle: #1c1a33;
+
+  --sk-up: #45d1b5;
+  --sk-down: #ff7a6e;
+  --sk-flat: #9aa39d;
+
+  --sk-data-1: #e8ece9;
+  --sk-data-2: #7aa7f7;
+  --sk-data-grid: #2a3530;
+  --sk-data-event: #3ec873;
+
+  --sk-shadow-overlay: none;
+}
+
+@theme inline {
+  --font-sans: var(--font-vazirmatn), Tahoma, sans-serif;
+  --font-latin: var(--font-plex), var(--font-vazirmatn), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --color-brand: var(--sk-brand);
+  --color-brand-hover: var(--sk-brand-hover);
+  --color-brand-active: var(--sk-brand-active);
+  --color-brand-subtle: var(--sk-brand-subtle);
+  --color-brand-muted: var(--sk-brand-muted);
+  --color-brand-on: var(--sk-brand-on);
+  --color-brand-text: var(--sk-brand-text);
+  --color-brand-indicator: var(--sk-brand-indicator);
+  --color-brand-ink: var(--sk-brand-ink);
+
+  --color-ink: var(--sk-text);
+  --color-ink-2: var(--sk-text-2);
+  --color-ink-3: var(--sk-text-3);
+  --color-ink-disabled: var(--sk-text-disabled);
+  --color-ink-inverse: var(--sk-text-inverse);
+
+  --color-paper: var(--sk-paper);
+  --color-paper-2: var(--sk-paper-2);
+  --color-surface: var(--sk-surface);
+  --color-sunken: var(--sk-sunken);
+  --color-scrim: var(--sk-scrim);
+
+  --color-line: var(--sk-line);
+  --color-line-strong: var(--sk-line-strong);
+  --color-line-tag: var(--sk-line-tag);
+  --color-focus: var(--sk-focus);
+  --color-hover: var(--sk-hover);
+  --color-pressed: var(--sk-pressed);
+
+  --color-success: var(--sk-success);
+  --color-success-subtle: var(--sk-success-subtle);
+  --color-warning: var(--sk-warning);
+  --color-warning-subtle: var(--sk-warning-subtle);
+  --color-error: var(--sk-error);
+  --color-error-subtle: var(--sk-error-subtle);
+  --color-info: var(--sk-info);
+  --color-info-subtle: var(--sk-info-subtle);
+
+  --color-verified: var(--sk-verified);
+  --color-verified-subtle: var(--sk-verified-subtle);
+  --color-unverified: var(--sk-unverified);
+  --color-unverified-subtle: var(--sk-unverified-subtle);
+  --color-ai: var(--sk-ai);
+  --color-ai-subtle: var(--sk-ai-subtle);
+
+  --color-up: var(--sk-up);
+  --color-down: var(--sk-down);
+  --color-flat: var(--sk-flat);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 4px;
+  --radius-button: 4px;
+
+  --text-display: var(--sk-t-display);
+  --text-display--line-height: 1.3;
+  --text-h1: var(--sk-t-h1);
+  --text-h1--line-height: 1.4;
+  --text-h2: var(--sk-t-h2);
+  --text-h2--line-height: 1.5;
+  --text-h3: var(--sk-t-h3);
+  --text-h3--line-height: 1.6;
+  --text-h4: var(--sk-t-h4);
+  --text-h4--line-height: 1.6;
+  --text-body-l: var(--sk-t-body-l);
+  --text-body-l--line-height: 1.85;
+  --text-body: var(--sk-t-body);
+  --text-body--line-height: 1.85;
+  --text-small: var(--sk-t-small);
+  --text-small--line-height: 1.7;
+  --text-meta: var(--sk-t-meta);
+  --text-meta--line-height: 1.5;
+  --text-label: 12px;
+  --text-label--line-height: 1.4;
+  --text-price: var(--sk-t-price);
+  --text-price--line-height: 1.3;
+  --text-price-l: var(--sk-t-price-l);
+  --text-price-l--line-height: 1.2;
+
+  --container-content: 1240px;
+  --container-reading: 720px;
+}
+
+:root {
+  --sk-t-display: 56px;
+  --sk-t-h1: 40px;
+  --sk-t-h2: 30px;
+  --sk-t-h3: 22px;
+  --sk-t-h4: 18px;
+  --sk-t-body-l: 18px;
+  --sk-t-body: 17px;
+  --sk-t-small: 14px;
+  --sk-t-meta: 14px;
+  --sk-t-price: 20px;
+  --sk-t-price-l: 28px;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --sk-t-display: 40px;
+    --sk-t-h1: 28px;
+    --sk-t-h2: 24px;
+    --sk-t-h3: 19px;
+    --sk-t-h4: 17px;
+    --sk-t-body-l: 17px;
+    --sk-t-body: 16px;
+    --sk-t-small: 13px;
+    --sk-t-meta: 13px;
+    --sk-t-price: 18px;
+    --sk-t-price-l: 22px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-line;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper text-ink font-sans text-body antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 2px solid var(--sk-focus);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--sk-brand-muted);
+    color: var(--sk-text);
+  }
+}
+
+@layer components {
+  .sk-latin {
+    font-family: var(--font-latin);
+    font-size: 0.92em;
+  }
+  .sk-num {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+  /* Interactive cards: a 2px ink rule draws across the top on hover (right→left in RTL). */
+  .sk-card-interactive {
+    position: relative;
+  }
+  .sk-card-interactive::before {
+    content: '';
+    position: absolute;
+    inset-block-start: -1px;
+    inset-inline-start: -1px;
+    height: 2px;
+    width: 0;
+    background: var(--sk-text);
+    transition: width 160ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .sk-card-interactive:hover::before,
+  .sk-card-interactive:focus-within::before {
+    width: calc(100% + 2px);
+  }
+  .sk-prose {
+    @apply text-body text-ink-2;
+  }
+  .sk-prose h2 {
+    @apply text-h3 font-bold text-ink mt-10 mb-3 pb-2 border-b-2 border-ink;
+  }
+  .sk-prose h3 {
+    @apply text-h4 font-bold text-ink mt-6 mb-2;
+  }
+  .sk-prose p {
+    @apply mb-4;
+  }
+  .sk-prose ul,
+  .sk-prose ol {
+    @apply mb-4 ps-5 flex flex-col gap-2;
+  }
+  .sk-prose ul {
+    list-style: square;
+  }
+  .sk-prose ol {
+    list-style: persian;
+  }
+  .sk-prose a {
+    @apply text-brand-text underline underline-offset-4;
+  }
+  .sk-prose strong {
+    @apply text-ink font-bold;
+  }
+}
+
+@keyframes sk-dot-travel {
+  from {
+    inset-inline-start: 0;
+  }
+  to {
+    inset-inline-start: calc(100% - 10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+  }
+}
